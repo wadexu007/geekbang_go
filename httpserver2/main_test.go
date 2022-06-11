@@ -1,3 +1,5 @@
+package main
+
 func TestPizzasHandler(t *testing.T) {
 	tt := []struct {
 		name       string
