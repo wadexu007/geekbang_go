@@ -4,6 +4,8 @@ import (
 	"github.com/tkanos/gonfig"
 )
 
+var FILE_PATH string
+
 type Configuration struct {
 	FILE_PATH   string
 	DB_USERNAME string

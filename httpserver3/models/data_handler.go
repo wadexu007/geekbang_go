@@ -4,13 +4,13 @@ import (
 	"encoding/csv"
 	"log"
 	"os"
-)
 
-var file_path string
+	"main.go/config"
+)
 
 func ReadData(fileName string) ([][]string, error) {
 
-	f, err := os.Open(file_path + fileName)
+	f, err := os.Open(config.FILE_PATH + fileName)
 
 	if err != nil {
 		return [][]string{}, err
@@ -35,14 +35,15 @@ func ReadData(fileName string) ([][]string, error) {
 }
 
 func WriteData(fileName string, record []string) {
-	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
+	full_path_file := config.FILE_PATH + fileName
+	f, err := os.OpenFile(full_path_file, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if os.IsNotExist(err) {
-		log.Println("file not exist, now try to crete")
-		error := os.MkdirAll(file_path, os.ModePerm)
+		log.Println("file not exist, now try to crete " + full_path_file)
+		error := os.MkdirAll(config.FILE_PATH, os.ModePerm)
 		if error != nil {
 			log.Println(error)
 		}
-		f, err = os.Create(fileName)
+		f, err = os.Create(full_path_file)
 
 	}
 	if err != nil {
