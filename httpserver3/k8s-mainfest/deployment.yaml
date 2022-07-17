@@ -120,3 +120,19 @@ spec:
   resources:
     requests:
       storage: 10Gi
+---
+apiVersion: v1
+data:
+  app.conf: |-
+    {
+        "FILE_PATH": "/data/test/",
+        "DB_USERNAME": "xxx",
+        "DB_PASSWORD": "xxx",
+        "DB_PORT": "3306",
+        "DB_HOST": "127.0.0.1",
+        "DB_NAME": "test"
+    }
+kind: ConfigMap
+metadata:
+  name: order-pizza-exercise-config
+  namespace: exercise
