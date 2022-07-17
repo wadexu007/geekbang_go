@@ -40,7 +40,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
-        image: asia.gcr.io/devops-apac-mgmt/exercise-pizza:1.0.2
+        image: asia.gcr.io/devops-apac-mgmt/exercise-pizza:1.0.3
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 5
