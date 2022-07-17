@@ -15,7 +15,7 @@ type Configuration struct {
 
 func GetConfig() Configuration {
 	configuration := Configuration{}
-	fileName := "./conf/config.json"
+	fileName := "/app/conf/config.json"
 	gonfig.GetConf(fileName, &configuration)
 	return configuration
 }

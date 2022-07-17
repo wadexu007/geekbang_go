@@ -70,9 +70,15 @@ spec:
         securityContext:
           allowPrivilegeEscalation: false
         volumeMounts:
+        - name: config-volume
+          mountPath: /app/conf/config.json
+          subPath: config.json
         - mountPath: /data
           name: gcp-filestore-test
       volumes:
+      - name: config-volume
+        configMap:
+          name: order-pizza-exercise-config
       - name: gcp-filestore-test
         persistentVolumeClaim:
           claimName: gcp-filestore-test-claim
