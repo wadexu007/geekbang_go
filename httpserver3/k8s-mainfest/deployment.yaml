@@ -122,8 +122,9 @@ spec:
       storage: 10Gi
 ---
 apiVersion: v1
+kind: ConfigMap
 data:
-  app.conf: |-
+  config.json: |-
     {
         "FILE_PATH": "/data/test/",
         "DB_USERNAME": "xxx",
@@ -132,7 +133,6 @@ data:
         "DB_HOST": "127.0.0.1",
         "DB_NAME": "test"
     }
-kind: ConfigMap
 metadata:
   name: order-pizza-exercise-config
   namespace: exercise
