@@ -1,0 +1,37 @@
+---
+# order-pizza service in exercise namespace
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: order-pizza-svc
+  name: order-pizza-svc
+  namespace: exercise
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: order-pizza
+  type: NodePort
+
+---
+# ingress nginx can't corss namespace to call svc
+# so add externalName type svc in dmz namespace, so that Ingress (in dmz) can point to this svc
+apiVersion: v1
+kind: Service
+metadata:
+  name:  order-pizza-ext-svc
+  namespace: dmz
+spec:
+  type: ExternalName
+  externalName: order-pizza-svc.exercise.svc.cluster.local
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: order-pizza

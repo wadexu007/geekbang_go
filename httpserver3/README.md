@@ -1,3 +1,8 @@
+# healthz check
+```
+curl -X GET 'http://localhost:8080/healthz'
+```
+
 # insert pizzas data
 ```
 curl -X POST 'http://localhost:8080/pizzas' -d '{"id":1,"name":"Pepperoni","price":12}' | jq
@@ -13,7 +18,6 @@ curl -X POST 'http://localhost:8080/orders' -d '{"pizza_id":2,"quantity":2}' | j
 
 # query data
 ```
-curl -X GET 'http://localhost:8080/healthz'
 curl -X GET 'http://localhost:8080/pizzas'
 curl -X GET 'http://localhost:8080/orders'
 curl -X GET 'http://localhost:8080/orders/1' | jq 

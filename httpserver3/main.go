@@ -88,12 +88,12 @@ func GetPizzasFromCSV(fileName string) Pizzas {
 	// read data from csv
 	records, err := ReadData(fileName)
 	if err != nil {
-		log.Fatalln("Can't read data from csv")
+		log.Println("Can't read data from csv")
 		return pizzas
 
 	}
 	if len(records) == 0 {
-		log.Fatalln("Error: No pizzas found")
+		log.Println("Error: No pizzas found")
 		return pizzas
 	}
 	for _, record := range records {
@@ -181,7 +181,7 @@ func GetOrdersFromCSV(fileName string) Orders {
 	// read data from csv
 	records, err := ReadData(fileName)
 	if err != nil {
-		log.Fatalln("Can't read data from csv")
+		log.Println("Can't read data from csv")
 		return orders
 
 	}
@@ -253,7 +253,7 @@ func WriteData(fileName string, record []string) {
 
 	}
 	if err != nil {
-		log.Fatalln("failed to open file", err)
+		log.Println("failed to open file", err)
 	}
 
 	defer f.Close()
@@ -262,7 +262,7 @@ func WriteData(fileName string, record []string) {
 	defer w.Flush()
 
 	if err := w.Write(record); err != nil {
-		log.Fatalln("error writing record to file", err)
+		log.Println("error writing record to file", err)
 	}
 }
 
@@ -304,5 +304,6 @@ func main() {
 	r.HandleFunc("/orders/{id}", GetOrderByID).Methods("GET")
 
 	// Bind to a port and pass our router in
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Println("Start http server")
+	log.Fatal(http.ListenAndServe(":80", r))
 }

@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.class: nginx
+  name: ingress-exercise
+  namespace: dmz
+spec:
+  rules:
+  - host: exercise.audiencecuration.ai
+    http:
+      paths:
+      - backend:
+          service:
+            name: order-pizza-ext-svc
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - exercise.audiencecuration.ai
+    secretName: tls-secret
