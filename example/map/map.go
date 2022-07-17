@@ -17,6 +17,10 @@ func main() {
 	}
 	fmt.Println("cloudmap:", myMap2)
 
+	if i, exist := myMap2["alicloudprovider"]; exist {
+		fmt.Printf("myMap2 is have this key and value is %s \n", i)
+	}
+
 	for k, v := range myMap2 {
 		fmt.Println("key:", k)
 		fmt.Println("value:", v)
