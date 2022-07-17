@@ -8,11 +8,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+
 	"net/http"
 	"os"
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"main.go/config"
 )
 
 type Pizza struct {
@@ -24,6 +26,7 @@ type Pizza struct {
 type Pizzas []Pizza
 
 // var pizzas Pizzas
+var file_path string
 
 type Order struct {
 	PizzaID  int `json:"pizza_id"`
@@ -67,8 +70,8 @@ func UpdatePizzas(w http.ResponseWriter, r *http.Request) {
 			p.Name,
 			strconv.Itoa(p.Price),
 		}
-		WriteData("pizzas.csv", record)
-		log.Println("write pizza record to csv succesfully")
+		log.Println("Start to write pizza record to csv")
+		WriteData(file_path+"pizzas.csv", record)
 
 	default:
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -77,7 +80,7 @@ func UpdatePizzas(w http.ResponseWriter, r *http.Request) {
 
 func GetPizzas(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	pizzas := GetPizzasFromCSV("pizzas.csv")
+	pizzas := GetPizzasFromCSV(file_path + "pizzas.csv")
 	log.Println("get all pizzas")
 	json.NewEncoder(w).Encode(pizzas)
 
@@ -130,7 +133,7 @@ func (orders Orders) GetByID(ID int) (Order, error) {
 func PlaceOrders(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	pizzas := GetPizzasFromCSV("pizzas.csv")
+	pizzas := GetPizzasFromCSV(file_path + "pizzas.csv")
 
 	var o Order
 
@@ -161,13 +164,13 @@ func PlaceOrders(w http.ResponseWriter, r *http.Request) {
 		strconv.Itoa(o.Quantity),
 		strconv.Itoa(o.Total),
 	}
-	WriteData("orders.csv", order_new)
+	WriteData(file_path+"orders.csv", order_new)
 	log.Println("write placed order record to csv succesfully")
 }
 
 func GetOrders(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	orders := GetOrdersFromCSV("orders.csv")
+	orders := GetOrdersFromCSV(file_path + "orders.csv")
 	if len(orders) == 0 {
 		http.Error(w, "No orders found, please palce order", http.StatusNotFound)
 		return
@@ -217,7 +220,7 @@ func GetOrdersFromCSV(fileName string) Orders {
 
 func GetOrderByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	orders := GetOrdersFromCSV("orders.csv")
+	orders := GetOrdersFromCSV(file_path + "orders.csv")
 
 	params := mux.Vars(r)
 	log.Println("params ====", params)
@@ -249,6 +252,11 @@ func HealthzHandler(w http.ResponseWriter, r *http.Request) {
 func WriteData(fileName string, record []string) {
 	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if os.IsNotExist(err) {
+		log.Println("file not exist, now try to crete")
+		error := os.MkdirAll(file_path, os.ModePerm)
+		if error != nil {
+			log.Println(error)
+		}
 		f, err = os.Create(fileName)
 
 	}
@@ -293,6 +301,13 @@ func ReadData(fileName string) ([][]string, error) {
 }
 
 func main() {
+
+	log.Println("Red Configuration")
+	configuration := config.GetConfig()
+	file_path = configuration.FILE_PATH
+	log.Println(configuration.FILE_PATH)
+	log.Println(configuration.DB_HOST)
+	log.Println(configuration.DB_NAME)
 
 	r := mux.NewRouter()
 	// Routes consist of a path and a handler function.
