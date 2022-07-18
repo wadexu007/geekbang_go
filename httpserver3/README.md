@@ -13,6 +13,7 @@
 * Query orders
 * Query order by ID
 
+<br>
 
 ## How to run locally
 ```
@@ -32,7 +33,7 @@ make push
 
 ## API
 
-### healthz check
+### Healthz check
 ```
 curl -X GET 'http://localhost/healthz'
 ```

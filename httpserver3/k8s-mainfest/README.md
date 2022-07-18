@@ -44,25 +44,25 @@ kubectl apply -f deployment.yaml
 ```
 
 ## Test
-### healthz check
+### Healthz check
 ```
 curl -X GET 'https://exercise.audiencecuration.ai/healthz'
 ```
 
-### insert pizzas data
+### Insert pizzas data
 ```
 curl -X POST 'https://exercise.audiencecuration.ai/pizzas' -d '{"id":1,"name":"Pepperoni","price":12}' | jq
 curl -X POST 'https://exercise.audiencecuration.ai/pizzas' -d '{"id":2,"name":"Capricciosa","price":10}' | jq
 curl -X POST 'https://exercise.audiencecuration.ai/pizzas' -d '{"id":3,"name":"Margherita","price":15}' | jq
 ```
 
-### insert orders data
+### Insert orders data
 ```
 curl -X POST 'https://exercise.audiencecuration.ai/orders' -d '{"pizza_id":1,"quantity":3}' | jq
 curl -X POST 'https://exercise.audiencecuration.ai/orders' -d '{"pizza_id":2,"quantity":2}' | jq
 ```
 
-### query data
+### Query data
 ```
 curl -X GET 'https://exercise.audiencecuration.ai/pizzas'
 curl -X GET 'https://exercise.audiencecuration.ai/orders'
