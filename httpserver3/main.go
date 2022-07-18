@@ -16,11 +16,11 @@ import (
 func main() {
 
 	log.Println("Red Configuration")
-	configuration := config.GetConfig()
-	config.FILE_PATH = configuration.FILE_PATH
-	log.Println(configuration.FILE_PATH)
-	log.Println(configuration.DB_HOST)
-	log.Println(configuration.DB_NAME)
+	// configuration := config.GetConfig()
+	config.FILE_PATH = config.Conf.FILE_PATH
+	log.Println(config.Conf.FILE_PATH)
+	log.Println(config.Conf.DB_HOST)
+	log.Println(config.Conf.DB_NAME)
 
 	r := mux.NewRouter()
 	// Routes consist of a path and a handler function.

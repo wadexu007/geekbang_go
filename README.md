@@ -1,3 +1,5 @@
-# geekbang_go
+## What's in this repo?
 
-Learning Golang
+This repository contains all my exercise when learning Golang in https://time.geekbang.org
+
+<br>

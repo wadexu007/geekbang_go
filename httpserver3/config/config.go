@@ -6,6 +6,8 @@ import (
 
 var FILE_PATH string
 
+var Conf *Configuration
+
 type Configuration struct {
 	FILE_PATH   string
 	DB_USERNAME string
@@ -15,9 +17,15 @@ type Configuration struct {
 	DB_NAME     string
 }
 
-func GetConfig() Configuration {
-	configuration := Configuration{}
+// func GetConfig() Configuration {
+// 	configuration := Configuration{}
+// 	fileName := "/app/conf/config.json"
+// 	gonfig.GetConf(fileName, &configuration)
+// 	return configuration
+// }
+
+func init() {
+	Conf = &Configuration{}
 	fileName := "/app/conf/config.json"
-	gonfig.GetConf(fileName, &configuration)
-	return configuration
+	gonfig.GetConf(fileName, Conf)
 }
