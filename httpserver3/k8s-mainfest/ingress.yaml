@@ -6,6 +6,7 @@ metadata:
     ingress.kubernetes.io/force-ssl-redirect: "true"
     ingress.kubernetes.io/ssl-redirect: "true"
     kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
   name: ingress-exercise
   namespace: dmz
 spec:
@@ -18,14 +19,14 @@ spec:
             name: order-pizza-ext-svc
             port:
               number: 80
-        path: /
+        path: /exercise(/|$)(.*)
         pathType: Prefix
       - backend:
           service:
             name: nginx-ext-svc
             port:
-              number: 80
-        path: /nginx
+              number: 8080
+        path: /nginx(/|$)(.*)
         pathType: Prefix
   tls:
   - hosts:
