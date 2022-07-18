@@ -1,8 +1,10 @@
 ## This is an execrise project about order pizzas
 
-Write by Golang
-Containerized by Docker
-Deployed to Kubernetes [[Manifests](https://github.com/wadexu007/geekbang_go/tree/main/httpserver3/k8s-mainfest)] 
+* Write by Golang
+* Containerized by Docker
+* Deployed to Kubernetes [[Manifests](https://github.com/wadexu007/geekbang_go/tree/main/httpserver3/k8s-mainfest)] 
+<br>
+
 
 ## How to run locally
 ```
