@@ -57,3 +57,13 @@ curl -X GET 'http://localhost/orders'
 curl -X GET 'http://localhost/orders/1' | jq 
 curl -X GET 'http://localhost/orders/2' | jq
 ```
+
+## Logging
+[logutils](https://github.com/hashicorp/logutils) from Hashicorp
+```
+2022/07/18 18:18:19 [INFO] Red Configuration
+2022/07/18 18:18:19 [INFO] Start http server
+2022/07/18 18:18:24 [ERROR] Can't read pizzas data from csv
+2022/07/18 18:18:34 [INFO] Write pizza record to csv
+2022/07/18 18:18:39 [INFO] get all pizzas
+```

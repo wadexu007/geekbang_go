@@ -1,7 +1,6 @@
 package services
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 
@@ -21,13 +20,13 @@ func GetAllOrders(fileName string) (Orders, error) {
 	// read data from csv
 	records, err := models.ReadData(fileName)
 	if err != nil {
-		log.Println("Can't read orders data from csv")
+		log.Println("[ERROR] Can't read orders data from csv")
 		return orders, err
 
 	}
 	if len(records) == 0 {
 		// log.Fatalln("Error: No orders found")
-		log.Println("Info: No orders found")
+		log.Println("[WARN] No orders found")
 		return orders, err
 	}
 	for _, record := range records {
@@ -55,43 +54,43 @@ func GetAllOrders(fileName string) (Orders, error) {
 	return orders, err
 }
 
-func GetOrderByID(id int) (Order, error) {
+func GetOrderByID(id int) (Orders, error) {
 	var orders Orders
-	var o Order
+	var os Orders
 
 	orders, err := GetAllOrders("orders.csv")
 	if err != nil {
-		log.Println("No any orders found")
-		return o, err
+		log.Println("[WARN] No any orders found")
+		return os, err
 	}
 
-	o, err = orders.GetByID(id)
-	if err != nil {
-		log.Println("Can't find this order")
-		return o, err
+	os = orders.GetByID(id)
+	if os == nil {
+		log.Println("[WARN] Can't find order by PizzaID: " + strconv.Itoa(id))
+		return os, err
 	}
-	return o, err
+	return os, err
 }
 
-func (orders Orders) GetByID(ID int) (Order, error) {
+func (orders Orders) GetByID(ID int) Orders {
+	var re_orders Orders
 	for _, order := range orders {
 		if order.PizzaID == ID {
-			return order, nil
+			re_orders = append(re_orders, order)
 		}
 	}
-
-	return Order{}, fmt.Errorf("couldn't find Order with Pizza ID: %d", ID)
+	return re_orders
 }
 
 func PlaceOrder(o Order) error {
 	pizzas, err := GetAllPizzas("pizzas.csv")
 	if err != nil {
-		log.Println("No pizzas found, can't place order")
+		log.Println("[WARN] No pizzas found, can't place order")
 		return err
 	}
 	p, err := pizzas.FindByID(o.PizzaID)
 	if err != nil {
-		log.Println("Not found this pizza, can't place order")
+		log.Println("[WARN] Not found this pizza, can't place order")
 		return err
 	}
 
@@ -103,7 +102,7 @@ func PlaceOrder(o Order) error {
 		strconv.Itoa(o.Quantity),
 		strconv.Itoa(o.Total),
 	}
-	log.Println("Start to write placed order record to csv")
+	log.Println("[INFO] Write placed order record to csv")
 	models.WriteData("orders.csv", order_new)
 	return nil
 }

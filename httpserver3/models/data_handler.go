@@ -10,7 +10,7 @@ import (
 
 func ReadData(fileName string) ([][]string, error) {
 
-	f, err := os.Open(config.FILE_PATH + fileName)
+	f, err := os.Open(config.Conf.FILE_PATH + fileName)
 
 	if err != nil {
 		return [][]string{}, err
@@ -35,11 +35,11 @@ func ReadData(fileName string) ([][]string, error) {
 }
 
 func WriteData(fileName string, record []string) {
-	full_path_file := config.FILE_PATH + fileName
+	full_path_file := config.Conf.FILE_PATH + fileName
 	f, err := os.OpenFile(full_path_file, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if os.IsNotExist(err) {
-		log.Println("file not exist, now try to crete " + full_path_file)
-		error := os.MkdirAll(config.FILE_PATH, os.ModePerm)
+		log.Println("[INFO] file not exist, now try to crete " + full_path_file)
+		error := os.MkdirAll(config.Conf.FILE_PATH, os.ModePerm)
 		if error != nil {
 			log.Println(error)
 		}
@@ -47,7 +47,7 @@ func WriteData(fileName string, record []string) {
 
 	}
 	if err != nil {
-		log.Println("failed to open file", err)
+		log.Println("[ERROR] Failed to open file", err)
 	}
 
 	defer f.Close()
@@ -56,6 +56,6 @@ func WriteData(fileName string, record []string) {
 	defer w.Flush()
 
 	if err := w.Write(record); err != nil {
-		log.Println("error writing record to file", err)
+		log.Println("[ERROR] Error writing record to file", err)
 	}
 }

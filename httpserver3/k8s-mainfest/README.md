@@ -12,6 +12,8 @@ This folder contains a collection of Kubernetes yaml used to deploy [exercise pr
 * PersistentVolume and PersistentVolumeClaim
 * ConfigMap
 * Taints and Tolerations
+* Shutdown Gracefully
+* Rolling Update
 * Secruity
    * TLS Secret
    * Ingress Nginx - force ssl redirect (http->https)
@@ -66,4 +68,14 @@ curl -X GET 'https://exercise.audiencecuration.ai/pizzas'
 curl -X GET 'https://exercise.audiencecuration.ai/orders'
 curl -X GET 'https://exercise.audiencecuration.ai/orders/1' | jq 
 curl -X GET 'https://exercise.audiencecuration.ai/orders/2' | jq
+```
+
+## Logging
+[logutils](https://github.com/hashicorp/logutils) from Hashicorp
+```
+2022/07/18 18:18:19 [INFO] Red Configuration
+2022/07/18 18:18:19 [INFO] Start http server
+2022/07/18 18:18:24 [ERROR] Can't read pizzas data from csv
+2022/07/18 18:18:34 [INFO] Write pizza record to csv
+2022/07/18 18:18:39 [INFO] get all pizzas
 ```

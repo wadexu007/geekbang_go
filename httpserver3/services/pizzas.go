@@ -21,12 +21,12 @@ func GetAllPizzas(fileName string) (Pizzas, error) {
 	// read data from csv
 	records, err := models.ReadData(fileName)
 	if err != nil {
-		log.Println("Can't read pizzas data from csv")
+		log.Println("[ERROR] Can't read pizzas data from csv")
 		return pizzas, err
 
 	}
 	if len(records) == 0 {
-		log.Println("Error: No pizzas found")
+		log.Println("[WARN] No pizzas found")
 		return pizzas, err
 	}
 	for _, record := range records {
@@ -57,7 +57,7 @@ func (ps Pizzas) FindByID(ID int) (Pizza, error) {
 		}
 	}
 
-	return Pizza{}, fmt.Errorf("couldn't find pizza with ID: %d", ID)
+	return Pizza{}, fmt.Errorf("[WARN] Couldn't find pizza with ID: %d", ID)
 }
 
 func AddPizza(p Pizza) {
@@ -68,7 +68,7 @@ func AddPizza(p Pizza) {
 		p.Name,
 		strconv.Itoa(p.Price),
 	}
-	log.Println("Start to write pizza record to csv")
+	log.Println("[INFO] Write pizza record to csv")
 	models.WriteData("pizzas.csv", record)
 
 }
