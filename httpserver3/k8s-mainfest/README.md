@@ -13,13 +13,13 @@ This folder contains a collection of Kubernetes yaml used to deploy [exercise pr
 * ConfigMap
 * Taints and Tolerations
 * Secruity
- * TLS Secret
- * Ingress Nginx - force ssl redirect (http->https)
- * Multiple namespaces to separate different resources
-   * Ingress gateway in dmz namespace
-   * Service and Deploy in exercise namespace
- * ExternalName Service (Ingress in dmz -> external svc in dmz -> svc in exercise)
- * Not Allow Privilege Escalation
+   * TLS Secret
+   * Ingress Nginx - force ssl redirect (http->https)
+   * Multiple namespaces to separate different resources
+     * Ingress gateway in dmz namespace
+     * Service and Deploy in exercise namespace
+   * ExternalName Service (Ingress in dmz -> external svc in dmz -> svc in exercise)
+   * Not Allow Privilege Escalation
 
 ## Deployment
 ```
