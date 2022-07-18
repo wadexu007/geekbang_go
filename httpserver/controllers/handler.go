@@ -28,8 +28,8 @@ func RootHandler(rw http.ResponseWriter, req *http.Request) {
 	glog.Info("Entering root handler")
 
 	// fmt.Println(os.Environ())
-	os.Setenv("Version", "1.0.0")
-	version := os.Getenv("Version")
+	os.Setenv("VERSION", "1.0.0")
+	version := os.Getenv("VERSION")
 
 	//输出request header
 	io.WriteString(rw, "================Details of the http request header:============\n")
@@ -45,7 +45,7 @@ func RootHandler(rw http.ResponseWriter, req *http.Request) {
 	}
 
 	//读取当前系统的环境变量中的 VERSION 配置，并写入 response header
-	rw.Header().Add("Version", version)
+	rw.Header().Add("VERSION", version)
 
 	//输出 response header
 	io.WriteString(rw, "================Details of the http response header:============\n")
