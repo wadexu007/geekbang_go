@@ -18,7 +18,7 @@ spec:
           service:
             name: order-pizza-ext-svc
             port:
-              number: 80
+              number: 8080
         path: /exercise(/|$)(.*)
         pathType: Prefix
       - backend:

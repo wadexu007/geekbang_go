@@ -42,7 +42,7 @@ func main() {
 
 	// Bind to a port and pass our router in
 	log.Println("[INFO] Start http server")
-	log.Fatal(http.ListenAndServe(":80", r))
+	log.Fatal(http.ListenAndServe(":8080", r))
 
 	// Listen on application shutdown signals.
 	listener := make(chan os.Signal, 1)

@@ -44,24 +44,24 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
-        image: asia.gcr.io/devops-apac-mgmt/exercise-pizza:1.0.4
+        image: asia.gcr.io/devops-apac-mgmt/exercise-pizza:1.0.5
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 5
           httpGet:
             path: /healthz
-            port: 80
+            port: 8080
           initialDelaySeconds: 10
           periodSeconds: 40
         name: app
         ports:
-        - containerPort: 80
+        - containerPort: 8080
           name: http
         readinessProbe:
           failureThreshold: 5
           httpGet:
             path: /healthz
-            port: 80
+            port: 8080
           initialDelaySeconds: 10
           periodSeconds: 20
         resources:
