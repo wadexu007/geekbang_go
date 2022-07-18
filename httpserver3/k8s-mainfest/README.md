@@ -11,7 +11,7 @@ This folder contains a collection of Kubernetes yaml used to deploy [exercise pr
 * Liveness/Readiness Probe
 * PersistentVolume and PersistentVolumeClaim
 * ConfigMap
-* Tolerations
+* Taints and Tolerations
 * Secruity
  * TLS Secret
  * Ingress Nginx - force ssl redirect (http->https)
