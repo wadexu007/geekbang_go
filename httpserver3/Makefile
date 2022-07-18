@@ -1,4 +1,4 @@
-export tag=1.0.2
+export tag=1.0.4
 
 hello:
 	echo "Welcome to pizza order system"
@@ -13,4 +13,4 @@ build: hello
 
 push: build
 	echo "pushing to my gcr"
-	docker push sia.gcr.io/devops-apac-mgmt/exercise-pizza:${tag}
+	docker push asia.gcr.io/devops-apac-mgmt/exercise-pizza:${tag}

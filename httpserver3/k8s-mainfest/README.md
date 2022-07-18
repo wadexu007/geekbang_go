@@ -1,7 +1,25 @@
 
-## What's in this repo?
+## What's in this folder?
 
-This repository contains a collection of Kubernetes yaml used to deploy execrise project in kubernetes clusters. 
+This folder contains a collection of Kubernetes yaml used to deploy [exercise project](https://github.com/wadexu007/geekbang_go/tree/main/httpserver3) in kubernetes clusters. 
+
+## Including K8S features
+* High Availability with replicas=2
+* Pod Anti Affinity (pods fall in different nodes)
+* Node Affinity
+* QoS, resources request and limit
+* Liveness/Readiness Probe
+* PersistentVolume and PersistentVolumeClaim
+* ConfigMap
+* Tolerations
+* Secruity
+ * TLS Secret
+ * Ingress Nginx - force ssl redirect (http->https)
+ * Multiple namespaces to separate different resources
+   * Ingress gateway in dmz namespace
+   * Service and Deploy in exercise namespace
+ * ExternalName Service (Ingress in dmz -> external svc in dmz -> svc in exercise)
+ * Not Allow Privilege Escalation
 
 ## Deployment
 ```
@@ -14,25 +32,35 @@ kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 ```
 
-## healthz check
+## Upgrade
+```
+# Edit image tag xxx in deployment.yaml
+image: asia.gcr.io/devops-apac-mgmt/exercise-pizza:xxx
+
+# then deploy
+kubectl apply -f deployment.yaml
+```
+
+## Test
+### healthz check
 ```
 curl -X GET 'https://exercise.audiencecuration.ai/healthz'
 ```
 
-## insert pizzas data
+### insert pizzas data
 ```
 curl -X POST 'https://exercise.audiencecuration.ai/pizzas' -d '{"id":1,"name":"Pepperoni","price":12}' | jq
 curl -X POST 'https://exercise.audiencecuration.ai/pizzas' -d '{"id":2,"name":"Capricciosa","price":10}' | jq
 curl -X POST 'https://exercise.audiencecuration.ai/pizzas' -d '{"id":3,"name":"Margherita","price":15}' | jq
 ```
 
-## insert orders data
+### insert orders data
 ```
 curl -X POST 'https://exercise.audiencecuration.ai/orders' -d '{"pizza_id":1,"quantity":3}' | jq
 curl -X POST 'https://exercise.audiencecuration.ai/orders' -d '{"pizza_id":2,"quantity":2}' | jq
 ```
 
-## query data
+### query data
 ```
 curl -X GET 'https://exercise.audiencecuration.ai/pizzas'
 curl -X GET 'https://exercise.audiencecuration.ai/orders'
