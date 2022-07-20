@@ -15,7 +15,7 @@ This folder contains a collection of Kubernetes yaml used to deploy [exercise pr
 * Shutdown Gracefully
 * Rolling Update
 * Secruity
-   * TLS Secret (Use cert-manager automatci issue from Let's Encrypt)
+   * TLS Secret (automatic sign from Let's Encrypt via cert-manager)
    * Ingress Nginx - force ssl redirect (http->https)
    * Multiple namespaces to separate different resources
      * Ingress gateway in dmz namespace
