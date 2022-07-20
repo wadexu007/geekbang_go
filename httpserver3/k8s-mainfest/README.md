@@ -15,7 +15,7 @@ This folder contains a collection of Kubernetes yaml used to deploy [exercise pr
 * Shutdown Gracefully
 * Rolling Update
 * Secruity
-   * TLS Secret
+   * TLS Secret (Use cert-manager automatci issue from Let's Encrypt)
    * Ingress Nginx - force ssl redirect (http->https)
    * Multiple namespaces to separate different resources
      * Ingress gateway in dmz namespace
@@ -25,6 +25,10 @@ This folder contains a collection of Kubernetes yaml used to deploy [exercise pr
 
 ## Deployment
 ```
+# deploy cert-manager
+kubectl apply -f cert-manager.yaml
+kubectl apply -f certificate-exercise.yaml
+
 # deploy Ingress Gateway
 kubectl apply -f ingress-controller.yaml
 kubectl apply -f ingress.yaml
@@ -35,11 +39,12 @@ kubectl apply -f service.yaml
 ```
 
 ## Upgrade
+Refer to [How to build and release](https://github.com/wadexu007/geekbang_go/tree/main/httpserver3#how-to-build-and-release)
 ```
-# Edit image tag xxx in deployment.yaml
+# Then edit image tag xxx in deployment.yaml
 image: asia.gcr.io/devops-apac-mgmt/exercise-pizza:xxx
 
-# then deploy
+# Then deploy new version
 kubectl apply -f deployment.yaml
 ```
 

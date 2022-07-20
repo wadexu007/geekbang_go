@@ -28,6 +28,7 @@ make local
 make build
 
 # build container and push to gcr
+# update tag in Makfile then execute below command
 make push
 ```
 

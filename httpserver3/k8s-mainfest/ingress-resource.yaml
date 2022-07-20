@@ -31,4 +31,4 @@ spec:
   tls:
   - hosts:
     - exercise.audiencecuration.ai
-    secretName: tls-secret
+    secretName: exercise-tls-secret
